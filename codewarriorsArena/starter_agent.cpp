@@ -5,7 +5,7 @@ const int INF=1e9;
 vector<vector<int>> adj;
 vector<vector<pair<int, int>>> playerPos;
 vector<int> lastCoin;
-int player,opponent;
+int player,opponent; 
 int finalMove;
 int maxDepth=4;
 // clock_t start;
@@ -49,6 +49,7 @@ void findpath(int x,int y,int len){
     if(len > maxdis1){
         maxdis2 = maxdis1;
         maxdis1 = len;
+        score_at_secondmax = score_atmax;
         score_atmax = coinscore(x , y);
     }
     else if(len < maxdis1){
@@ -263,6 +264,7 @@ int main()
         for(int j=1;j<=3;j++)
         cin >> playerPos[i][j].first >> playerPos[i][j].second;
 
+    //this stores the last coin for both the players
     lastCoin=vector<int>(3);
     for(int i=1;i<=2;i++)
         cin >> lastCoin[i];
@@ -270,3 +272,13 @@ int main()
     findBestMove();
     return 0;
 }
+
+
+//This code's main purpose is to take the state of the board and the current player as input, and find out the best move possible
+//This returns the coin that we should move along with the position it should be moved to !
+//This uses 'MINIMAX' algorithm  : Minimax is a kind of backtracking algorithm that is used in decision making and game theory to find the optimal move for a player, assuming that your opponent also plays optimally
+//In Minimax the two players are called maximizer and minimizer. The maximizer tries to get the highest score possible while the minimizer tries to do the opposite and get the lowest score possible.
+//Every board state has a value associated with it. In a given state if the maximizer has upper hand then, the score of the board will tend to be some positive value. If the minimizer has the upper hand in that board state then it will tend to be some negative value. 
+//The values of the board are calculated by some heuristics which are unique for every type of game.
+
+//
